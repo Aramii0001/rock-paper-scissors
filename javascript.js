@@ -2,7 +2,7 @@ const playerScore = document.querySelector('#player');
 const computerScore = document.querySelector('#computer');
 const result = document.querySelector('.winner');
 const choiceBtns = document.querySelectorAll('.btn');
-const replayBtn = document.createElement("span")
+const replayBtn = document.createElement("span");
 let player_score = 0;
 let computer_score = 0;
 
@@ -64,9 +64,9 @@ function pickWinner(){
 
 function playAgain(){
     replayBtn.textContent = 'replay'
-    result.append(replayBtn)
-    //the below does not work
-    choiceBtns.forEach(button => button.removeEventListener("click"));
+    result.append(replayBtn);
+    //remove buttons
+    choiceBtns.forEach(button => button.setAttribute('disabled', ''));
 }
 
 choiceBtns.forEach(button => button.addEventListener("click", () => {
@@ -75,9 +75,5 @@ choiceBtns.forEach(button => button.addEventListener("click", () => {
 }));
 
 replayBtn.addEventListener("click", () => {
-    player_score = 0;
-    computer_score = 0;
-    updateScores(player_score, computer_score);
-    result.textContent = "The winner is: ";
-    result.removeChild(replayBtn);
+    window.location.reload();
 });
