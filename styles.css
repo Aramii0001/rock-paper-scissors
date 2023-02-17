@@ -46,3 +46,14 @@ button{
 .scores{
     padding-top: 20px;
 }
+
+span{
+    color: white;
+    margin-left: 24px;
+    background-color: #1DA1F2;
+    padding: 6px;
+    border-radius: 10px;
+}
+.winner{
+    padding: 9px;
+}

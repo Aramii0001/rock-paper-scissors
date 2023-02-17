@@ -1,7 +1,8 @@
 const playerScore = document.querySelector('#player');
 const computerScore = document.querySelector('#computer');
 const result = document.querySelector('.winner');
-const choiceBtns = document.querySelectorAll('button');
+const choiceBtns = document.querySelectorAll('.btn');
+const replayBtn = document.createElement("span")
 let player_score = 0;
 let computer_score = 0;
 
@@ -42,16 +43,12 @@ function playRound(player_choice){
 }
 
 function updateScores(player_score, computer_score){
-    
-    if (player_score === 5 || computer_score === 5){
-        pickWinner();
-    }
-    console.log('picking now');
-    console.log(player_score);
-    console.log(computer_score);
     playerScore.textContent = `Player Score: ${player_score}`;
     computerScore.textContent = `Computer Score: ${computer_score}`;
 
+    if (player_score === 5 || computer_score === 5){
+        pickWinner();
+    }
 }
 
 function pickWinner(){
@@ -61,9 +58,26 @@ function pickWinner(){
     else{
         result.textContent = 'Computer win!';
     }
+
+    playAgain();
+}
+
+function playAgain(){
+    replayBtn.textContent = 'replay'
+    result.append(replayBtn)
+    //the below does not work
+    choiceBtns.forEach(button => button.removeEventListener("click"));
 }
 
 choiceBtns.forEach(button => button.addEventListener("click", () => {
     player_choice = button.textContent.toLowerCase();
     playRound(player_choice);
 }));
+
+replayBtn.addEventListener("click", () => {
+    player_score = 0;
+    computer_score = 0;
+    updateScores(player_score, computer_score);
+    result.textContent = "The winner is: ";
+    result.removeChild(replayBtn);
+});
