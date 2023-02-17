@@ -1,7 +1,9 @@
-
-//Rock paper scissors, computer picks a choice
-//Then website gives input popup for user choice
-//Lastly, it checks for who won
+const playerScore = document.querySelector('#player');
+const computerScore = document.querySelector('#computer');
+const result = document.querySelector('.winner');
+const choiceBtns = document.querySelectorAll('button');
+let player_score = 0;
+let computer_score = 0;
 
 function getRandomInt(max){
     return Math.floor(Math.random()*max);
@@ -9,49 +11,59 @@ function getRandomInt(max){
 
 function getComputerChoice(){
     const i = getRandomInt(3);
-    let choice = ''
     if (i === 0){
-        choice = 'rock';
+        return 'rock';
     }
-    else if (i ===1){
-        choice = 'paper';
+    else if (i === 1){
+        return 'paper';
     }
     else{
-        choice = 'scissors';
+        return 'scissors';
     }
-    return choice;
 }
 
-let player_score = 0;
-let computer_score = 0;
-
-for (let n = 0; n<5; n++){
+function playRound(player_choice){
     computer = getComputerChoice();
-    player = (window.prompt('What is your choice?')).toLowerCase();
 
-    if (computer===player){
-        console.log('tie!')
+    if (computer===player_choice){
+        //console.log('tie!');
     }
     else if(computer==="rock"){
-        (player==="paper") ? player_score++ : computer_score++;
+        (player_choice==="paper") ? player_score++ : computer_score++;
     }
     else if(computer==="paper"){
-        (player==="scissors") ? player_score++ : computer_score++;
+        (player_choice==="scissors") ? player_score++ : computer_score++;
     }
     else if(computer==="scissors"){
-        (player==="rock") ? player_score++ : computer_score++;
+        (player_choice==="rock") ? player_score++ : computer_score++;
+    }
+
+    updateScores(player_score, computer_score);
+}
+
+function updateScores(player_score, computer_score){
+    
+    if (player_score === 5 || computer_score === 5){
+        pickWinner();
+    }
+    console.log('picking now');
+    console.log(player_score);
+    console.log(computer_score);
+    playerScore.textContent = `Player Score: ${player_score}`;
+    computerScore.textContent = `Computer Score: ${computer_score}`;
+
+}
+
+function pickWinner(){
+    if (player_score > computer_score){
+        result.textContent = 'Player win!';
+    }
+    else{
+        result.textContent = 'Computer win!';
     }
 }
 
-console.log(computer_score);
-console.log(player_score);
-
-if (player_score > computer_score){
-    console.log('Player win')
-}
-else if (computer_score > player_score){
-    console.log('computer win')
-}
-else if (computer_score===player_score){
-    console.log('game tie')
-}
+choiceBtns.forEach(button => button.addEventListener("click", () => {
+    player_choice = button.textContent.toLowerCase();
+    playRound(player_choice);
+}));
