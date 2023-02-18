@@ -28,25 +28,39 @@ h1{
 .intro{
     text-align: center;
     font-size: 2em;
+    transform: translate(0%, 50%);
 }
 
 .plot{
     visibility: hidden;
+    margin: 50px;
 }
 
 .one{
     animation-name: disappear;
-    animation-duration: 5s;
+    animation-duration: 3s;
     animation-delay: 2s;
 }
-/* animation for all others equals SUM(previous)+1s */
-/* remember after animations all done, make some js function to diplay: none the whole intro div*/
 .two{
     animation-name: disappear;
     animation-duration: 5s;
-    animation-delay: 2s;
+    animation-delay: 6s;
 }
-
+.three{
+    animation-name: disappear;
+    animation-duration: 5s;
+    animation-delay: 12s;
+}
+.four{
+    animation-name: disappear;
+    animation-duration: 3s;
+    animation-delay: 18s;
+}
+.five{
+    animation-name: disappear;
+    animation-duration: 4s;
+    animation-delay: 22s;
+}
 
 @keyframes disappear {
     0% {visibility: visible;}
