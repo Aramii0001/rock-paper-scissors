@@ -78,9 +78,7 @@ function playAgain(){
 }
 
 choiceBtns.forEach(button => button.addEventListener("click", () => {
-    console.log('clicked');
     player_choice = button.textContent.toLowerCase();
-    console.log(player_choice);
     playRound(player_choice);
 }));
 
@@ -89,8 +87,9 @@ replayBtn.addEventListener("click", () => {
 });
 
 // WEBSITE STUFF \/
+
+//Title effects
 document.querySelector('h1').onmouseover =
-    //event is below, make sure to change iterations to length
  event => {
     let iterations = 0;
 
@@ -108,12 +107,10 @@ document.querySelector('h1').onmouseover =
         if(iterations >= 19) clearInterval(interval);
         
         iterations += 1;
-    }, 30);
+    }, 60);
 }
 
-//thinkin we get each p element and on page load we do that event for each, 
-//waiting 5 seconds before removing the element
-
+// INTRO SEQUENCE
 //1
 one.onanimationstart=
 event => {
