@@ -3,6 +3,7 @@ const computerScore = document.querySelector('#computer');
 const result = document.querySelector('.winner');
 const choiceBtns = document.querySelectorAll('.btn');
 const replayBtn = document.createElement("span");
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let player_score = 0;
 let computer_score = 0;
 
@@ -77,3 +78,54 @@ choiceBtns.forEach(button => button.addEventListener("click", () => {
 replayBtn.addEventListener("click", () => {
     window.location.reload();
 });
+
+// WEBSITE STUFF \/
+document.querySelector('h1').onmouseover =
+    //event is below, make sure to change iterations to length
+ event => {
+    let iterations = 0;
+
+    const interval = setInterval(() => {
+    event.target.innerText = event.target.innerText.split("")
+    .map((letter, index) => {
+        if(index < iterations){
+            return event.target.dataset.value[index];
+        }
+
+        return letters[Math.floor(Math.random() * 26)]
+    })
+    .join("");
+
+        if(iterations >= 19) clearInterval(interval);
+        
+        iterations += 1;
+    }, 30);
+}
+
+//thinkin we get each p element and on page load we do that event for each, 
+//waiting 5 seconds before removing the element
+
+document.getElementById('1').onanimationstart=
+event => {
+    let iterations = 0;
+
+    const interval = setInterval(() => {
+    event.target.innerText = event.target.innerText.split("")
+    .map((letter, index) => {
+        if(index < iterations){
+            return event.target.dataset.value[index];
+        }
+
+        return letters[Math.floor(Math.random() * 26)]
+    })
+    .join("");
+
+        if(iterations >= 17) clearInterval(interval);
+        
+        iterations += 1;
+    }, 30);
+}
+
+const len = document.getElementById('1');
+console.log(len.innerHTML.length);
+//remember make a termina you can type into ok bye 
