@@ -321,7 +321,6 @@ five.onanimationend = () => {
 usernameInput.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         username = usernameInput.value;
-        console.log(username);
         usernameBox.style.display = "none";
         terminalContainer.style.visibility = "visible";
         terminalTitle.textContent = 'Terminal \u2014 '+username+'@'+username+'-VirtualBox: ~/Desktop/rockpaperscissors'

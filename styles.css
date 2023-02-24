@@ -152,13 +152,28 @@ h1{
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
     background-color: rgb(29,29,29);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+::-webkit-scrollbar {
+    width: 10px;
+    margin-right: 1px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(29,29,29);
+    margin-bottom: 12px;
+}
+::-webkit-scrollbar-thumb{
+    background: rgb(107, 107, 107);
+    border-radius: 10px;
+}
+
 
 #input-text{
     background-color: rgb(29,29,29);
     border: none;
     font-size: medium;
-    width: 87vw;
+    width: 80vw;
 }
 #input-text:focus{
     outline: none;
