@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Courier New', Courier, monospace;
-    color: rgb(0,255,0);
+    color: white;
 }
 
 :root{
@@ -78,14 +78,15 @@ h1{
     visibility: hidden;
     border: 1px solid rgb(107, 107, 107);
     border-radius: var(--border-radius);
-    width: 860px;
-    height: 240px;
+    width: 90vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
 }
 
 .top-bar{
     display: flex;
+    flex-direction: column;
     background-color: rgb(42,42,42);
     padding: 10px;
     justify-content: flex-start;
@@ -93,9 +94,13 @@ h1{
     border-top-right-radius: var(--border-radius);
     border: none;
     border-bottom: 1px solid rgb(16,16,16);
-    /* Find a better way to center text than gap*/
-    gap: 84px;
 }
+
+.terminal-title{
+    align-self: center;
+    position:absolute;
+}
+
 .mac-ripoff{
     display: flex;
     gap: 8px;
@@ -116,40 +121,33 @@ h1{
 }
 
 .terminal-container{
+    text-indent: 6px;
     display: flex;
+    flex-direction: column;
     flex: 1;
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
     background-color: rgb(29,29,29);
-    flex-direction: column;
-    justify-content: flex-end;
-}
-.terminal-container > ul,
-.terminal-container > div{
-    margin: 0 0 2px 6px;
 }
 
-ul{
-    list-style-type: none;
-}
-
-button{
+#input-text{
     background-color: rgb(29,29,29);
     border: none;
-    text-decoration: underline;
+    font-size: medium;
+    width: 87vw;
 }
-span{
-    text-decoration: underline;
+#input-text:focus{
+    outline: none;
 }
+
+
 footer{
     margin-top: auto;
     background-color: rgb(29,29,29);
     border-top: 1px solid rgb(16,16,16);
     text-align: center;
     padding: 8px 0 8px 0;
-    color: white;
 }
 a{
     text-decoration: none;
-    color: white;
 }
