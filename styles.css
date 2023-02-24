@@ -69,6 +69,28 @@ h1{
 
 
 
+.username-container{
+    visibility: hidden;
+    position: absolute;
+    margin-top: 333px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.disclaimer{
+    font-size: small;
+    margin: 0;
+}
+#username{
+    background-color: rgb(29,29,29);
+    width: 30vw;
+    padding: 10px;
+}
+#username:focus{
+    outline: none;
+}
 
 
 /* just for now, it'll be unhidden later*/
@@ -100,7 +122,9 @@ h1{
     align-self: center;
     position:absolute;
 }
-
+.terminal-text{
+    margin-top: 2px;
+}
 .mac-ripoff{
     display: flex;
     gap: 8px;

@@ -4,10 +4,106 @@ const two = document.getElementById('2');
 const three = document.getElementById('3');
 const four = document.getElementById('4');
 const five = document.getElementById('5');
-const terminalContainer = document.querySelector('.container')
-const introBox = document.querySelector('.intro')
+const usernameBox = document.getElementById('username-box');
+const usernameInput = document.getElementById('username');
+const terminalContainer = document.querySelector('.container');
+const terminalTitle = document.getElementById('title');
+const introBox = document.querySelector('.intro');
+const input = document.getElementById('input-text');
+const terminal = document.getElementById('terminal');
+let cmd;
 let player_score = 0;
 let computer_score = 0;
+let round;
+let username;
+
+
+input.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        displayText();
+        command(input);
+
+        input.value = '';
+    }
+});
+
+function displayText() {
+    const line = document.createElement('div');
+    line.textContent = '> ' + input.value;
+    line.classList.add('line');
+    terminal.appendChild(line);
+}
+
+function command(input) {
+    cmd = '';
+    switch (input.value.toLowerCase()) {
+        case 'help':
+            cmd = 'help';
+            break;
+        case 'whois':
+            cmd = 'whois';
+            break;
+        case 'whoami':
+            cmd = 'whoami';
+            break;
+        case 'play -rock':
+            cmd = 'rock';
+            break;
+        case 'play -paper':
+            cmd = 'paper';
+            break;
+        case 'play -scissors':
+            cmd = 'scissors';
+            break;
+        case 'clear':
+            cmd = 'clear';
+            break;
+        case 'play -reset':
+            cmd = 'reset';
+            break;
+    }
+    computerOutput();
+}
+function computerOutput() {
+    const line = document.createElement('div');
+    if (cmd === 'help'){
+        line.textContent = 'help, whoami, whois, play -rock, play -paper, play -scissors, play -reset, clear';
+    }
+    else if (cmd === 'whoami'){
+        line.textContent = username;
+    }
+    else if (cmd === 'whois'){
+        line.textContent = "Hello! I go by the username Aramii and I am the creator of this web-game. My github link is in the footer. hint: mouse over my username"
+    }
+    else if (cmd === 'rock'){
+        playRound('rock');
+    }
+    else if (cmd === 'paper'){
+        playRound('paper');
+    }
+    else if (cmd === 'scissors'){
+        playRound('scissors');
+    }
+    else if (cmd === 'reset'){
+        line.textContent = 'Game has been reset.';
+        player_score = 0;
+        computer_score = 0;
+    }
+    else if (cmd === 'clear'){
+        const lines = document.getElementsByClassName('line');
+        for (let i=0; i<lines.length; i++) {
+            lines.item(i).style.display = "none";
+        }
+    }
+    else{
+        line.textContent = 'That is not a valid command. Enter "help" to recieve an exhaustive list of all commands.'
+    }
+
+    line.classList.add('line');
+    terminal.appendChild(line);
+}
+
 
 function getRandomInt(max){
     return Math.floor(Math.random()*max);
@@ -28,58 +124,59 @@ function getComputerChoice(){
 
 function playRound(player_choice){
     computer = getComputerChoice();
-
+if (player_score < 5 && computer_score < 5){
     if (computer===player_choice){
-        //console.log('tie!');
+        round='Tie game';
     }
     else if(computer==="rock"){
-        (player_choice==="paper") ? player_score++ : computer_score++;
+        (player_choice==="paper") ? (player_score++, round='Player score!') : (computer_score++, round='Computer score!');
     }
     else if(computer==="paper"){
-        (player_choice==="scissors") ? player_score++ : computer_score++;
+        (player_choice==="scissors") ? (player_score++, round='Player score!') : (computer_score++, round='Computer score!');
     }
     else if(computer==="scissors"){
-        (player_choice==="rock") ? player_score++ : computer_score++;
+        (player_choice==="rock") ? (player_score++, round='Player score!') : (computer_score++, round='Computer score!');
     }
 
-    updateScores(player_score, computer_score);
+    updateScores(player_score, computer_score, round);
+}
+else{
+    const line = document.createElement('div');
+    line.textContent = 'A winner has already been decided. To play again please use the command "play -reset"'
+    line.classList.add('line');
+    terminal.appendChild(line);
+}
 }
 
-function updateScores(player_score, computer_score){
-    playerScore.textContent = `Player Score: ${player_score}`;
-    computerScore.textContent = `Computer Score: ${computer_score}`;
+function updateScores(player_score, computer_score, round) {
+    const line = document.createElement('div');
+    line.textContent = round;
+    line.classList.add('line');
+    const line2 = document.createElement('div');
+    line2.textContent = 'Player Score: ' +player_score;
+    line2.classList.add('line');
+    const line3 = document.createElement('div');
+    line3.textContent = 'Computer Score: ' +computer_score;
+    line3.classList.add('line');
+    terminal.appendChild(line);
+    terminal.appendChild(line2);
+    terminal.appendChild(line3);
 
     if (player_score === 5 || computer_score === 5){
         pickWinner();
     }
 }
-
 function pickWinner(){
+    const line = document.createElement('div');
     if (player_score > computer_score){
-        result.textContent = 'Player win!';
+        line.textContent = 'PLAYER WINS!';
     }
     else{
-        result.textContent = 'Computer win!';
+        line.textContent = 'COMPUTER WINS!';
     }
-
-    playAgain();
+    line.classList.add('line');
+    terminal.appendChild(line);
 }
-
-function playAgain(){
-    replayBtn.textContent = 'replay';
-    result.append(replayBtn);
-    //remove buttons
-    choiceBtns.forEach(button => button.setAttribute('disabled', ''));
-}
-
-choiceBtns.forEach(button => button.addEventListener("click", () => {
-    player_choice = button.textContent.toLowerCase();
-    playRound(player_choice);
-}));
-
-replayBtn.addEventListener("click", () => {
-    window.location.reload();
-});
 
 // WEBSITE STUFF \/
 
@@ -217,8 +314,18 @@ event => {
 }
 five.onanimationend = () => {
     five.style.display = "none";
-    terminalContainer.style.visibility = "visible";
     introBox.style.display = "none";
+    usernameBox.style.visibility = "visible";
 }
 
-//remember make a termina you can type into ok bye 
+usernameInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        username = usernameInput.value;
+        console.log(username);
+        usernameBox.style.display = "none";
+        terminalContainer.style.visibility = "visible";
+        terminalTitle.textContent = 'Terminal \u2014 '+username+'@'+username+'-VirtualBox: ~/Desktop/rockpaperscissors'
+    }
+});
+
+//All that's left is to find a way to scroll and then we're done. But that's for tmrw. Cya
